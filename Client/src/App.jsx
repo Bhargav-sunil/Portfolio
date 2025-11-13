@@ -134,6 +134,13 @@ export default function App() {
     }
   }, [darkMode]);
 
+  function copyEmail() {
+    navigator.clipboard
+      .writeText(profile.email)
+      .then(() => alert("Email copied to clipboard"))
+      .catch(() => alert("Copy failed — please copy manually"));
+  }
+
   // Smooth scroll to section
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -148,7 +155,6 @@ export default function App() {
       });
     }
   };
-
 
   // Scroll effects
   useEffect(() => {
@@ -479,6 +485,28 @@ export default function App() {
                     />
                   </svg>
                 </a>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className={`inline-flex items-center px-5 py-3 border-2 rounded-xl transform hover:scale-105 transition-all duration-300 font-medium ${
+                    darkMode
+                      ? "border-gray-600 hover:border-indigo-500 hover:bg-gray-800 text-gray-300"
+                      : "border-gray-300 hover:border-indigo-500 hover:bg-white text-gray-700"
+                  }`}
+                >
+                  <FaEnvelope className="mr-2" />
+                  Email me
+                </a>
+                <button
+                  onClick={copyEmail}
+                  className={`inline-flex items-center px-5 py-3 border-2 rounded-xl transform hover:scale-105 transition-all duration-300 font-medium ${
+                    darkMode
+                      ? "border-gray-600 hover:border-indigo-500 hover:bg-gray-800 text-gray-300"
+                      : "border-gray-300 hover:border-indigo-500 hover:bg-white text-gray-700"
+                  }`}
+                >
+                  <FaCopy className="mr-2" />
+                  Copy email
+                </button>
               </div>
 
               <div
