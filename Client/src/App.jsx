@@ -425,7 +425,7 @@ export default function App() {
       </header>
 
       <main id="main" className="flex-1 w-full">
-        {/* Hero Section */}
+        {/* Hero Section - FIXED Z-INDEX AND POINTER EVENTS */}
         <section
           id="hero"
           className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
@@ -437,18 +437,20 @@ export default function App() {
                 : "bg-gradient-to-br from-white via-blue-50/50 to-indigo-100/30"
             }`}
           />
+          {/* Added pointer-events-none so these don't block clicks on mobile */}
           <div
-            className={`absolute top-10 left-10 w-72 h-72 rounded-full blur-3xl animate-float ${
+            className={`absolute top-10 left-10 w-72 h-72 rounded-full blur-3xl animate-float pointer-events-none ${
               darkMode ? "bg-purple-900/20" : "bg-purple-300/20"
             }`}
           />
           <div
-            className={`absolute bottom-10 right-10 w-96 h-96 rounded-full blur-3xl animate-float-delayed ${
+            className={`absolute bottom-10 right-10 w-96 h-96 rounded-full blur-3xl animate-float-delayed pointer-events-none ${
               darkMode ? "bg-indigo-900/20" : "bg-indigo-300/20"
             }`}
           />
 
-          <div className="max-w-7xl mx-auto w-full px-6 py-12 flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20">
+          {/* Added relative and z-10 to bring content above background layers */}
+          <div className="relative z-10 max-w-7xl mx-auto w-full px-6 py-12 flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20">
             <div className="w-full md:w-1/2 space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
                 Hi, I'm{" "}
@@ -468,7 +470,7 @@ export default function App() {
                 <a
                   href="#projects"
                   onClick={(e) => handleNavClick("projects", e)}
-                  className="inline-flex items-center px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-semibold"
+                  className="inline-flex items-center px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-semibold cursor-pointer"
                 >
                   See Projects
                   <svg
@@ -487,7 +489,7 @@ export default function App() {
                 </a>
                 <a
                   href={`mailto:${profile.email}`}
-                  className={`inline-flex items-center px-5 py-3 border-2 rounded-xl transform hover:scale-105 transition-all duration-300 font-medium ${
+                  className={`inline-flex items-center px-5 py-3 border-2 rounded-xl transform hover:scale-105 transition-all duration-300 font-medium cursor-pointer ${
                     darkMode
                       ? "border-gray-600 hover:border-indigo-500 hover:bg-gray-800 text-gray-300"
                       : "border-gray-300 hover:border-indigo-500 hover:bg-white text-gray-700"
@@ -498,7 +500,7 @@ export default function App() {
                 </a>
                 <button
                   onClick={copyEmail}
-                  className={`inline-flex items-center px-5 py-3 border-2 rounded-xl transform hover:scale-105 transition-all duration-300 font-medium ${
+                  className={`inline-flex items-center px-5 py-3 border-2 rounded-xl transform hover:scale-105 transition-all duration-300 font-medium cursor-pointer ${
                     darkMode
                       ? "border-gray-600 hover:border-indigo-500 hover:bg-gray-800 text-gray-300"
                       : "border-gray-300 hover:border-indigo-500 hover:bg-white text-gray-700"
@@ -533,7 +535,7 @@ export default function App() {
 
             <div className="w-full md:w-1/2 flex justify-center">
               <div className="relative group">
-                <div className="absolute -inset-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-tilt" />
+                <div className="absolute -inset-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-tilt pointer-events-none" />
                 <div
                   className={`relative w-80 h-80 rounded-2xl p-8 shadow-2xl flex flex-col items-center justify-center transform group-hover:scale-105 transition-all duration-500 ${
                     darkMode ? "bg-gray-800" : "bg-white"
@@ -556,7 +558,7 @@ export default function App() {
                   >
                     {profile.title}
                   </p>
-                  <div className="mt-4 flex items-center justify-center gap-4">
+                  <div className="mt-4 flex items-center justify-center gap-4 relative z-20">
                     <a
                       href={profile.github}
                       target="_blank"
